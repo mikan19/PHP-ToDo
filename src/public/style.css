@@ -11,7 +11,7 @@ header {
   background-color:#fff ;
 } 
 
-a {	
+.nav-menu {	
   text-decoration: none;
   color: #4b4b4b;
 }
@@ -27,6 +27,9 @@ li {
   font-size: 14px;
 }
 
-nav {
+.nav-top {
   margin: 0 0 0 auto;
-}
+  }
+
+
+

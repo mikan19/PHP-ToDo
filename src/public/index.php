@@ -13,9 +13,9 @@
     <h2>Todoアプリ</h2>
     <nav class="nav-top">
       <ul>
-        <li><a href="index.php">ホーム</a></li>
-        <li><a href="category/index.php">カテゴリ一覧</a></li>
-        <li><a href="user/logout.php">ログアウト</a></li>
+        <li><a class="nav-menu" href="index.php">ホーム</a></li>
+        <li><a class="nav-menu" href="category/index.php">カテゴリ一覧</a></li>
+        <li><a class="nav-menu" href="user/logout.php">ログアウト</a></li>
       </ul>
     </nav>
   </header>
