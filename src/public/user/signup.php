@@ -35,5 +35,23 @@ if (isset($_SESSION["error_message"])) {
             <input type="submit" value="アカウント作成" />
             <p><a href="signin.php">ログイン画面へ</a></p>
         </form>
+        <form action="../task/store.php" method="post">
+            <div>
+                <label for="category">カテゴリを選んでください</label>
+                <select name="category">
+                <option value="">タスクを追加</option>
+                <option value="task1">タスク１</option>
+                <option value="task2">タスク２</option>
+                <option value="task3">タスク３</option>
+                <option value="task4">タスク４</option>
+                </select>
+
+            </div>
+            <div>
+                <label for="date">日付を選んでください</label>
+                <input type="date" name="date" id="date" />
+            </div>
+            <input type="submit" value="アカウント作成" />
+        </form>
     </body>
 </html>
