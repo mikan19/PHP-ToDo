@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
   <title>Document</title>
   <base href="http://localhost:8080/">
 </head>
+
 <body>
   <header>
     <h2>Todoアプリ</h2>
@@ -19,6 +21,8 @@
       </ul>
     </nav>
   </header>
+
+  <main>
+    <a href="./create.php">タスクを追加</a>
+  </main>
 </body>
-
-
