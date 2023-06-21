@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,12 +14,15 @@
     <h2>Todoアプリ</h2>
     <nav class="nav-top">
       <ul>
-        <li><a href="index.php">ホーム</a></li>
-        <li><a href="category/index.php">カテゴリ一覧</a></li>
-        <li><a href="user/logout.php">ログアウト</a></li>
+        <li><a class="nav-menu" href="index.php">ホーム</a></li>
+        <li><a class="nav-menu" href="category/index.php">カテゴリ一覧</a></li>
+        <li><a class="nav-menu" href="user/logout.php">ログアウト</a></li>
       </ul>
     </nav>
   </header>
 </body>
-
+  <main>
+    <a href="./create.php">タスクを追加</a>
+  </main>
+</body>
 

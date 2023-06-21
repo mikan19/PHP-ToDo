@@ -1,51 +1,34 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 session_start();
+$_SESSION['error'] = '';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $category = $_POST["category_id"] ?? '';
-    $taskName = $_POST["status"] ?? '';
-    $date = $_POST["deadline"] ?? '';
+$userId = 1;
+$task = filter_input(INPUT_POST, 'task');
+$categoryId = filter_input(INPUT_POST, 'categoryId');
+$deadline = filter_input(INPUT_POST, 'deadline');
 
-    if (empty($category)) {
-        $_SESSION["error_message"] = "カテゴリが選択されていません";
-        header("Location: ../task/create.php");
-        exit;
-    }
-    if (empty($taskName)) {
-        $_SESSION["error_message"] = "タスク名が入力されていません";
-        header("Location: ../task/create.php");
-        exit;
-    }
-    if (empty($date)) {
-        $_SESSION["error_message"] = "締切日が入力されていません";
-        header("Location: ../task/create.php");
-        exit;
-    }
-
-    // DB接続部分
-    $dbUserName = 'root';
-    $dbPassword = 'password';
-
-    try {
-        $pdo = new PDO("mysql:host=mysql;dbname=todo;charset=utf8", $dbUserName, $dbPassword);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // tasksテーブルにタスクを追加
-        $stmt_tasks = $pdo->prepare("INSERT INTO tasks (category_id, status, deadline) VALUES (:category_id, :status, :deadline)");
-        $stmt_tasks->bindParam(':category_id', $category);
-        $stmt_tasks->bindParam(':status', $taskName);
-        $stmt_tasks->bindParam(':deadline', $date);
-        $stmt_tasks->execute();
-
-        // 登録成功後はindex.phpに遷移
-        header("Location: ../index.php");
-        exit;
-
-    } catch (PDOException $e) {
-        die("データベースへの接続に失敗しました: " . $e->getMessage());
-    }
+if (empty($_POST['task']) && !empty($_POST['deadline'])) {
+    $_SESSION['error'] = 'タスク内容または日付を入力してください';
+    header('Location: ./create.php');
+    exit();
 }
-?>
+
+$dbUserName = 'root';
+$dbPassword = 'password';
+$pdo = new PDO(
+    'mysql:host=mysql; dbname=todo; charset=utf8',
+    $dbUserName,
+    $dbPassword
+);
+
+$sql =
+    'INSERT INTO tasks(user_id, contents, category_id, deadline) VALUES (:userId, :contents, :categoryId, :deadline)';
+
+$statement = $pdo->prepare($sql);
+$statement->bindValue(':userId', $userId, PDO::PARAM_INT);
+$statement->bindValue(':contents', $task, PDO::PARAM_STR);
+$statement->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+$statement->bindValue(':deadline', $deadline, PDO::PARAM_STR);
+$statement->execute();
+header('Location: ../index.php');
+exit();
