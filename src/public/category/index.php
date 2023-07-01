@@ -31,7 +31,7 @@ try {
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
 
-    // 記事のデータを取得
+    // カテゴリのデータを取得
     $todos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     die("データベースへの接続に失敗しました: " . $e->getMessage());
@@ -62,7 +62,7 @@ try {
   <h3>カテゴリ一覧</h3>
   <main>
 
-    <!-- 検索機能と並び替え選択ボタン -->
+   
     <div class="sarchform">
       <form method="GET" action="category/store.php">
         <input type="text" name="keyword" placeholder="カテゴリー追加">
@@ -74,18 +74,19 @@ try {
       <tbody>
         <?php foreach ($todos as $todo): ?>
           <tr class="ctegory">
-            <td><?php echo $todo['name']; ?></td>
-          
-            <td>
-
-              <a href="category/edit.php?id=<?php echo $blog['id']; ?>"><button type="submit">編集</button></a>
-              <a href="category/delete.php?id=<?php echo $blog['id']; ?>"><button type="submit">削除</button></a>
-
             
+            <td><?php echo $todo['name']; ?></td>
+
+            <td>
+              <a href="category/edit.php?id=<?php echo $userId; ?>"><button type="submit">編集</button></a>
+              <a href="category/delete.php?id=<?php echo $userId; ?>"><button type="submit">削除</button></a>
             </td>
 
 
           </tr>
+
+
+
         <?php endforeach; ?>
       </tbody>
     </table>

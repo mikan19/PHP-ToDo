@@ -5,13 +5,13 @@ session_start();
 $dbUserName = 'root';
 $dbPassword = 'password';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['name'])) {
-        $categoryName = $_POST['name'];
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['keyword'])) {
+        $categoryName = $_GET['keyword'];
 
         if (empty($categoryName)) {
             $_SESSION['error'] = 'カテゴリー名が入力されていません';
-            header("Location: category/index.php");
+            header("Location:index.php");
             exit();
         }
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // カテゴリー追加成功のメッセージをセッションに保存
             $_SESSION['success'] = 'カテゴリーを追加しました';
-            header("Location:category/index.php");
+            header("Location:index.php");
             exit();
         } catch (PDOException $e) {
             die("データベースへの接続に失敗しました: " . $e->getMessage());
