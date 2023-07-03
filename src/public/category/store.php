@@ -5,9 +5,9 @@ session_start();
 $dbUserName = 'root';
 $dbPassword = 'password';
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['keyword'])) {
-        $categoryName = $_GET['keyword'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['keyword'])) {
+        $categoryName = $_POST['keyword'];
 
         if (empty($categoryName)) {
             $_SESSION['error'] = 'カテゴリー名が入力されていません';

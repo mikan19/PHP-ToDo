@@ -22,10 +22,10 @@ try {
     $userId = $_SESSION["user_id"];
 
     if (!empty($keyword)) {
-        $stmt = $pdo->prepare("SELECT name FROM categories WHERE user_id = :user_id AND (title LIKE :keyword OR contents LIKE :keyword)y");
+        $stmt = $pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, tasks.category_id, categories.name FROM tasks INNER JOIN categories ON tasks.category_id = categories.id WHERE tasks.user_id = :user_id AND (tasks.contents LIKE :keyword OR categories.name LIKE :keyword)");
         $stmt->bindParam(':keyword', $keyword, PDO::PARAM_STR);
     } else {
-        $stmt = $pdo->prepare("SELECT name FROM categories WHERE user_id = :user_id ");
+        $stmt = $pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, categories.id AS category_id, categories.name FROM tasks INNER JOIN categories ON tasks.category_id = categories.id WHERE tasks.user_id = :user_id ");
     }
 
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -78,8 +78,8 @@ try {
             <td><?php echo $todo['name']; ?></td>
 
             <td>
-              <a href="category/edit.php?id=<?php echo $userId; ?>"><button type="submit">編集</button></a>
-              <a href="category/delete.php?id=<?php echo $userId; ?>"><button type="submit">削除</button></a>
+              <a href="category/edit.php?id=<?php echo $todo['category_id']; ?>"><button type="submit">編集</button></a>
+              <a href="category/delete.php?id=<?php echo $todo['category_id']; ?>"><button type="submit">削除</button></a>
             </td>
 
 
