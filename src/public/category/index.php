@@ -22,10 +22,10 @@ try {
     $userId = $_SESSION["user_id"];
 
     if (!empty($keyword)) {
-        $stmt = $pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, tasks.category_id, categories.name FROM tasks INNER JOIN categories ON tasks.category_id = categories.id WHERE tasks.user_id = :user_id AND (tasks.contents LIKE :keyword OR categories.name LIKE :keyword)");
-        $stmt->bindParam(':keyword', $keyword, PDO::PARAM_STR);
+      $stmt = $pdo->prepare("SELECT id, name FROM categories WHERE user_id = :user_id AND name LIKE :keyword");
+      $stmt->bindParam(':keyword', $keyword, PDO::PARAM_STR);
     } else {
-        $stmt = $pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, categories.id AS category_id, categories.name FROM tasks INNER JOIN categories ON tasks.category_id = categories.id WHERE tasks.user_id = :user_id ");
+      $stmt = $pdo->prepare("SELECT id, name FROM categories WHERE user_id = :user_id");
     }
 
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -64,9 +64,9 @@ try {
 
    
     <div class="sarchform">
-      <form method="GET" action="category/store.php">
+      <form method="POST" action="category/store.php">
         <input type="text" name="keyword" placeholder="カテゴリー追加">
-        <button type="submit">追加</button>
+        <button type="submit">登録</button>
       </form>
     </div>
 
@@ -78,8 +78,8 @@ try {
             <td><?php echo $todo['name']; ?></td>
 
             <td>
-              <a href="category/edit.php?id=<?php echo $todo['category_id']; ?>"><button type="submit">編集</button></a>
-              <a href="category/delete.php?id=<?php echo $todo['category_id']; ?>"><button type="submit">削除</button></a>
+              <a href="category/edit.php?id=<?php echo $todo['id']; ?>"><button type="submit">編集</button></a>
+              <a href="category/delete.php?id=<?php echo $todo['id']; ?>"><button type="submit">削除</button></a>
             </td>
 
 
