@@ -135,14 +135,21 @@ $todos = $stmt->fetchAll(PDO::FETCH_ASSOC);
           <td><?php echo $todo['contents']; ?></td>
           <td><?php echo $todo['deadline']; ?></td>
           <td><?php echo $todo['name']; ?></td>
-          <td>
-            <a href="task/updateStatus.php?id=<?php echo $todo['id']; ?>&status=<?php echo ($todo['status_text'] == '完了') ? 0 : 1; ?>"><button type="button"><?php echo $todo['status_text']; ?></button></a>
-
-
-            <a href="task/edit.php?id=<?php echo $todo['id']; ?>"><button type="button">編集</button></a>
-            <a href="task/delete.php?id=<?php echo $todo['id']; ?>"><button type="button">削除</button></a>
+                    <td>
+            <form action="task/updateStatus.php" method="post" class="button-form">
+              <input type="hidden" name="id" value="<?php echo $todo['id']; ?>">
+              <input type="hidden" name="status" value="<?php echo ($todo['status_text'] == '完了') ? 0 : 1; ?>">
+              <button type="submit"><?php echo $todo['status_text']; ?></button>
+            </form>
+            <form action="task/edit.php" method="post" class="button-form">
+              <input type="hidden" name="id" value="<?php echo $todo['id']; ?>">
+              <button type="submit">編集</button>
+            </form>
+            <form action="task/delete.php" method="post" class="button-form">
+              <input type="hidden" name="id" value="<?php echo $todo['id']; ?>">
+              <button type="submit">削除</button>
+            </form>
           </td>
-
         </tr>
       <?php endforeach; ?>
       </tbody>
