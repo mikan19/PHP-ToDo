@@ -1,6 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
 header {
   width: 100%;
   padding: 30px 4% 10px;
@@ -10,6 +11,8 @@ header {
   align-items: center;
   background-color:#fff;
 } 
+
+
 
 .nav-menu {	
   text-decoration: none;
@@ -35,6 +38,10 @@ main{
   margin-top: 50px;
 }
 
+.button-form {
+  display: inline;
+  margin-right: 5px;
+}
 
 
 
